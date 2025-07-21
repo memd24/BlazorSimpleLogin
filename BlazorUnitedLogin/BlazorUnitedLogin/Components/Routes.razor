@@ -1,7 +1,7 @@
 ﻿<Router AppAssembly="typeof(Program).Assembly" AdditionalAssemblies="new[] { typeof(Client._Imports).Assembly }">
 
     <Found Context="routeData">
-        @if (routeData.PageType.Name == "Login" || routeData.PageType.Name == "Register")
+        @if (IsPublicPage(routeData.PageType.Name))
         {
             <RouteView RouteData="routeData" DefaultLayout="null" />
         }
@@ -22,3 +22,30 @@
         </LayoutView>
     </NotFound>
 </Router>
+@{
+    bool IsPublicPage(string name)
+    {
+        // Lista de páginas públicas
+        string[] publicPages = new[]
+        {
+            "Login",
+            "Register",
+            "AccessDenied",
+            "ConfirmEmail",
+            "ConfirmEmailChange",
+            "ExternalLogin",
+            "ForgotPassword",
+            "ForgotPasswordConfirmation",
+            "InvalidPasswordReset",
+            "InvalidUser",
+            "Lockout",
+            "LoginWith2fa",
+            "LoginWithRecoveryCode",
+            "RegisterConfirmation",
+            "ResendEmailConfirmation",
+            "ResetPassword",
+            "ResetPasswordConfirmation"
+        };
+        return publicPages.Contains(name);
+    }
+}
